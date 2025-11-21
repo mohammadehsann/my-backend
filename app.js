@@ -28,8 +28,7 @@ const fileFilter = (req, file, cb) => {
   else cb(null, false);
 };
 app.use(compression());
-// app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
-app.use(bodyParser.json()); // application/json
+app.use(bodyParser.json());
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
 );
@@ -55,9 +54,9 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.mongoUri)
+  .connect(mongoUri)
   .then((result) => {
-    const server = app.listen(process.env.PORT);
+    const server = app.listen(port);
     const io = require("./socket-io").init(server);
     io.on("connection", (socket) => {
       console.log("client connected");
