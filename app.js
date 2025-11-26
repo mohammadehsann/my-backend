@@ -9,7 +9,7 @@ const path = require("path");
 const multer = require("multer");
 const compression = require("compression");
 const cors = require("cors");
-
+require("dotenv").config();
 const app = express();
 const mongoUri = process.env.MONGO_URI;
 const port = process.env.PORT || 5000;
