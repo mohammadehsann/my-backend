@@ -205,7 +205,7 @@ exports.deletePost = async (req, res, next) => {
       throw error;
     }
 
-    if (post.creator.toString() !== req.userId) {
+    if (post.creator._id.toString().toString() !== req.userId) {
       const error = new Error("User Not Allowed!");
       error.statusCode = 403;
       throw error;
