@@ -3,6 +3,7 @@ const { body } = require("express-validator");
 const feedController = require("../controllers/feed");
 const isAuth = require("../middlware/is-auth");
 const router = express.Router();
+const { multerFunc } = require("../middlware/multer");
 
 // GET /feed/posts
 router.get("/posts", isAuth, feedController.getPosts);
@@ -11,6 +12,7 @@ router.get("/posts", isAuth, feedController.getPosts);
 router.post(
   "/post",
   isAuth,
+  multerFunc(),
   [
     body("title").trim().isLength({ min: 5 }),
     body("content").trim().isLength({ min: 5 }),
@@ -23,6 +25,7 @@ router.get("/post/:postId", isAuth, feedController.getPost);
 router.put(
   "/post/:postId",
   isAuth,
+  multerFunc(),
   [
     body("title").trim().isLength({ min: 5 }),
     body("content").trim().isLength({ min: 5 }),
